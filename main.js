@@ -260,10 +260,11 @@ function showAllTimers() {
     }
 }
 function deleteAll() {
-    for (const instance of audioIntervalInstances) {
-        deleteInstance(instance.instanceId);
+    for (let i = audioIntervalInstances.length - 1; i >= 0; i--) {
+        deleteInstance(audioIntervalInstances[i].instanceId);
     }
 }
+
 
 function initialize() {
 
