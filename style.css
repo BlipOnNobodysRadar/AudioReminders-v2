@@ -18,12 +18,9 @@ body {
 .hide {
     display: none;
 }
-.container {
-    max-width: 1200px;
-}
 .audio-interval-instance {
     margin-left: 1%;
-    max-width: 500px;
+    max-width: 450px;
     margin-bottom: 30px;
     display: inline-block;
 }

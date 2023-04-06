@@ -156,7 +156,7 @@ function renderAudioIntervalInstance({ instanceId, label, minInterval, maxInterv
     const countdownVisibilityClass = isCountdownVisible ? '' : 'hide';
     const instanceHtml = `
     <div class="audio-interval-instance col-12 col-lg-6" id="instance-${instanceId}">
-        <div class="audio-interval-instance-content p-3 rounded border">
+        <div class="audio-interval-instance-content p-3">
             <div class="text-center mb-3">
                 <h4 class="mb-0" id="title-${instanceId}">${label}</h4>
             </div>
