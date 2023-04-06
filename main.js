@@ -96,13 +96,17 @@ function stopAudio(instanceId) {
 
 
 
-function toggleCountdownVisibility(instanceId) {
+function toggleCountdownVisibility(instanceId, forceShow = false) {
     const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
     if (!instance) return;
 
     instance.isCountdownVisible = !instance.isCountdownVisible;
     const countdown = document.getElementById(`countdown-${instanceId}`);
-    countdown.classList.toggle('hide');
+    if (forceShow) {
+        countdown.classList.remove('hide');
+    } else {
+        countdown.classList.toggle('hide');
+    }
 }
 
 function deleteInstance(instanceId) {
@@ -240,6 +244,23 @@ function loadAllPresets() {
     PRESET_OPTIONS.forEach(option => {
         createAudioIntervalInstance(option);
     });
+}
+function playAll() {
+    for (const instance of audioIntervalInstances) {
+        startAudio(instance.instanceId);
+    }
+}
+
+function stopAll() {
+    for (const instance of audioIntervalInstances) {
+        stopAudio(instance.instanceId);
+    }
+}
+
+function showAllTimers() {
+    for (const instance of audioIntervalInstances) {
+        toggleCountdownVisibility(instance.instanceId, true);
+    }
 }
 
 
