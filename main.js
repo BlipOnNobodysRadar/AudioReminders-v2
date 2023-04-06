@@ -5,13 +5,14 @@ const PRESET_OPTIONS = [
     { label: 'Movement', minInterval: 1800, maxInterval: 14400, audioSrc: 'audio/movement.mp3' },
     { label: 'Gratitude', minInterval: 7200, maxInterval: 43200, audioSrc: 'audio/gratitude.mp3' }
 ];
+let instanceCounter = 0;
 
 let audioIntervalInstances = [];
 
 const DEFAULT_COUNTDOWN_VISIBILITY = false;
 
 function createAudioIntervalInstance({ label, minInterval, maxInterval, audioSrc, isCountdownVisible = DEFAULT_COUNTDOWN_VISIBILITY }) {
-    const instanceId = Date.now();
+    const instanceId = instanceCounter++;
 
     // Add the instance to the list of instances
     audioIntervalInstances.push({ instanceId, label, minInterval, maxInterval, audioSrc, isCountdownVisible, volume: 0.5 });
@@ -74,61 +75,6 @@ function startAudio(instanceId) {
     };
 
     playWithInterval();
-}
-
-
-function stopAudio(instanceId) {
-    const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
-    if (!instance) return;
-
-    if (instance.timerId) {
-        clearInterval(instance.timerId);
-        instance.timerId = null;
-    }
-
-    // Stop and reset the countdown display
-    if (instance.countdownIntervalId) {
-        clearInterval(instance.countdownIntervalId);
-        instance.countdownIntervalId = null;
-        updateCountdown(instanceId, 0);
-    }
-}
-
-
-
-function toggleCountdownVisibility(instanceId, forceShow = false) {
-    const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
-    if (!instance) return;
-
-    instance.isCountdownVisible = !instance.isCountdownVisible;
-    const countdown = document.getElementById(`countdown-${instanceId}`);
-    countdown.classList.toggle('hide');
-}
-
-function deleteInstance(instanceId) {
-    const index = audioIntervalInstances.findIndex(instance => instance.instanceId === instanceId);
-    if (index === -1) return;
-
-    stopAudio(instanceId);
-    audioIntervalInstances.splice(index, 1);
-
-    const instanceElement = document.getElementById(`instance-${instanceId}`);
-    instanceElement.remove();
-}
-
-function playAudio(instanceId) {
-    const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
-    if (!instance) return;
-
-    const audioElement = document.getElementById(`audio-${instanceId}`);
-    if (audioElement) {
-        audioElement.volume = instance.volume;
-        audioElement.play();
-    }
-
-    // Reset the countdown after the audio has been played
-    const nextInterval = getRandomInterval(instance.minInterval, instance.maxInterval);
-    updateCountdown(instanceId, nextInterval);
 }
 
 
@@ -236,6 +182,61 @@ function renderAudioIntervalInstance({ instanceId, label, minInterval, maxInterv
     });
 }
 
+
+function stopAudio(instanceId) {
+    const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
+    if (!instance) return;
+
+    if (instance.timerId) {
+        clearInterval(instance.timerId);
+        instance.timerId = null;
+    }
+
+    // Stop and reset the countdown display
+    if (instance.countdownIntervalId) {
+        clearInterval(instance.countdownIntervalId);
+        instance.countdownIntervalId = null;
+        updateCountdown(instanceId, 0);
+    }
+}
+
+
+
+function toggleCountdownVisibility(instanceId, forceShow = false) {
+    const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
+    if (!instance) return;
+
+    instance.isCountdownVisible = !instance.isCountdownVisible;
+    const countdown = document.getElementById(`countdown-${instanceId}`);
+    countdown.classList.toggle('hide');
+}
+
+function deleteInstance(instanceId) {
+    const index = audioIntervalInstances.findIndex(instance => instance.instanceId === instanceId);
+    if (index === -1) return;
+
+    stopAudio(instanceId);
+    audioIntervalInstances.splice(index, 1);
+
+    const instanceElement = document.getElementById(`instance-${instanceId}`);
+    instanceElement.remove();
+}
+
+function playAudio(instanceId) {
+    const instance = audioIntervalInstances.find(instance => instance.instanceId === instanceId);
+    if (!instance) return;
+
+    const audioElement = document.getElementById(`audio-${instanceId}`);
+    if (audioElement) {
+        audioElement.volume = instance.volume;
+        audioElement.play();
+    }
+
+    // Reset the countdown after the audio has been played
+    const nextInterval = getRandomInterval(instance.minInterval, instance.maxInterval);
+    updateCountdown(instanceId, nextInterval);
+}
+
 function loadAllPresets() {
     PRESET_OPTIONS.forEach(option => {
         createAudioIntervalInstance(option);
@@ -258,7 +259,11 @@ function showAllTimers() {
         toggleCountdownVisibility(instance.instanceId, true);
     }
 }
-
+function deleteAll() {
+    for (const instance of audioIntervalInstances) {
+        deleteInstance(instance.instanceId);
+    }
+}
 
 function initialize() {
 
