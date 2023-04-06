@@ -183,11 +183,20 @@ function renderAudioIntervalInstance({ instanceId, label, minInterval, maxInterv
                     <input type="file" class="form-control-file" id="audioFile-${instanceId}" accept="audio/*">
                 </div>
                 <div class="text-center col-12">
-                    <button class="btn btn-success mr-2" onclick="startAudio(${instanceId})">Start</button>
-                    <button class="btn btn-danger mr-2" onclick="stopAudio(${instanceId})">Stop</button>
-                    <button class="btn btn-warning mr-2" onclick="toggleCountdownVisibility(${instanceId})">Toggle Countdown</button>
-                    <button class="btn btn-danger" onclick="deleteInstance(${instanceId})">Delete</button>
+                    <button class="btn btn-success mr-2" onclick="startAudio(${instanceId})">
+                        <i class="bi bi-play-fill"></i>
+                    </button>
+                    <button class="btn btn-danger mr-2" onclick="stopAudio(${instanceId})">
+                        <i class="bi bi-stop-fill"></i>
+                    </button>
+                    <button class="btn btn-warning mr-2" onclick="toggleCountdownVisibility(${instanceId})">
+                        <i class="bi bi-clock"></i>
+                    </button>
+                    <button class="btn btn-danger" onclick="deleteInstance(${instanceId})">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
                 </div>
+            
             </div>
             <div class="row mt-3 ${countdownVisibilityClass}" id="countdown-${instanceId}">
                 <div class="col-12">
