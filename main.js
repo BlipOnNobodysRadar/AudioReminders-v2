@@ -102,11 +102,7 @@ function toggleCountdownVisibility(instanceId, forceShow = false) {
 
     instance.isCountdownVisible = !instance.isCountdownVisible;
     const countdown = document.getElementById(`countdown-${instanceId}`);
-    if (forceShow) {
-        countdown.classList.remove('hide');
-    } else {
-        countdown.classList.toggle('hide');
-    }
+    countdown.classList.toggle('hide');
 }
 
 function deleteInstance(instanceId) {

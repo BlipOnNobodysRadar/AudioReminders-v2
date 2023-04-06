@@ -12,15 +12,15 @@ body {
     border: 2px solid #cccccc;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
     padding: 20px;
+    min-width: 399px;
 }
 .hide {
     display: none;
 }
 .audio-interval-instance {
-    margin-left: 1%;
-    max-width: 450px;
+    margin-left: 20px;
+    max-width: 400px;
     margin-bottom: 30px;
     display: inline-block;
 }
