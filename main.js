@@ -57,25 +57,28 @@ function startAudio(instanceId) {
             playWithInterval();
         }, interval);
 
-        if (instance.isCountdownVisible) {
-            if (instance.countdownIntervalId) {
-                clearInterval(instance.countdownIntervalId); // Clear the existing countdown interval
-            }
-
-            let remainingTime = interval / 1000;
-            updateCountdown(instanceId, remainingTime);
-            instance.countdownIntervalId = setInterval(() => {
-                remainingTime--;
-                updateCountdown(instanceId, remainingTime);
-                if (remainingTime <= 0) {
-                    clearInterval(instance.countdownIntervalId);
-                }
-            }, 1000);
+        if (instance.countdownIntervalId) {
+            clearInterval(instance.countdownIntervalId); // Clear the existing countdown interval
         }
+
+        let remainingTime = interval / 1000;
+        if (instance.isCountdownVisible) {
+            updateCountdown(instanceId, remainingTime);
+        }
+        instance.countdownIntervalId = setInterval(() => {
+            remainingTime--;
+            if (instance.isCountdownVisible) {
+                updateCountdown(instanceId, remainingTime);
+            }
+            if (remainingTime <= 0) {
+                clearInterval(instance.countdownIntervalId);
+            }
+        }, 1000);
     };
 
     playWithInterval();
 }
+
 
 
 
