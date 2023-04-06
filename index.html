@@ -17,23 +17,20 @@
         </div>
         <div class="shared-container">
             <div class="button-container">
+                <button class="btn btn-success mr-2" onclick="playAll()">Play All</button>
+                <button class="btn btn-danger mr-2" onclick="stopAll()">Stop All</button>
+                <button class="btn btn-warning mr-2" onclick="showAllTimers()">Toggle All Timers</button>
+                <button class="btn btn-danger mr-2" onclick="deleteAll()">Delete All</button>
+            </div>
+            <div class="button-container">
                 <div>
                     <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[0])">Focus</button>
                     <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[1])">Mindfulness</button>
                     <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[2])">Hydration</button>
                     <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[3])">Movement</button>
                     <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[4])">Gratitude</button>
-                </div>
-                <div>
-                    <button class="btn btn-primary" id="create-custom-instance">Create Custom Instance</button>
                     <button class="btn btn-primary" id="load-all-presets">Load All Presets</button>
-                    <div class="text-center my-3">
-                        <button class="btn btn-success mr-2" onclick="playAll()">Play All</button>
-                        <button class="btn btn-danger mr-2" onclick="stopAll()">Stop All</button>
-                        <button class="btn btn-warning" onclick="showAllTimers()">Toggle All <i class="bi bi-clock"></i></button>
-                        <button class="btn btn-danger mr-2" onclick="deleteAll()">Delete All</button>
-                    </div>
-                    
+                    <button class="btn btn-primary" id="create-custom-instance">Create Custom Instance</button>
                 </div>
             </div>
         </div>
