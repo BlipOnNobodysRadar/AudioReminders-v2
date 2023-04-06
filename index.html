@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Audio Interval</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+</head>
+<body>
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="text-light">Multiple Audio Interval Players</h1>
+            <p class="lead text-light">Play multiple audio files at random intervals throughout the day</p>
+        </div>
+        <div class="shared-container">
+            <div class="button-container">
+                <div>
+                    <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[0])">Focus</button>
+                    <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[1])">Mindfulness</button>
+                    <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[2])">Hydration</button>
+                    <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[3])">Movement</button>
+                    <button class="btn btn-info" onclick="createAudioIntervalInstance(PRESET_OPTIONS[4])">Gratitude</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="create-custom-instance">Create Custom Instance</button>
+                    <button class="btn btn-primary" id="load-all-presets">Load All Presets</button>
+                </div>
+            </div>
+        </div>
+        <div id="audio-interval-instances">
+            <!-- Audio interval instances will be added here -->
+        </div>
+    </div>    
+    <script src="main.js"></script>
+</body>
+</html>

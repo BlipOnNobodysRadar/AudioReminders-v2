@@ -1,0 +1,39 @@
+body {
+    background-color: #343a40;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+.shared-container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.audio-interval-instance {
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.hide {
+    display: none;
+}
+.container {
+    max-width: 1200px;
+}
+.audio-interval-instance {
+    margin-bottom: 30px;
+}
+.audio-interval-instance-content {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.button-container .btn {
+    margin-bottom: 10px;
+}
