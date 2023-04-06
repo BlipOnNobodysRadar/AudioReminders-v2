@@ -22,7 +22,10 @@ body {
     max-width: 1200px;
 }
 .audio-interval-instance {
+    margin-left: 1%;
+    max-width: 500px;
     margin-bottom: 30px;
+    display: inline-block;
 }
 .audio-interval-instance-content {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,4 +39,14 @@ body {
 }
 .button-container .btn {
     margin-bottom: 10px;
+}
+#instances-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#audio-interval-instances {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
 }
