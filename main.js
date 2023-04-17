@@ -1,9 +1,12 @@
+// TODO: add eat fruit, stop and evaluate.
 const PRESET_OPTIONS = [
     { label: 'Focus', minInterval: 1500, maxInterval: 7200, audioSrc: 'audio/focus.mp3' },
     { label: 'Mindfulness', minInterval: 300, maxInterval: 1800, audioSrc: 'audio/mindfulness.mp3' },
     { label: 'Hydration', minInterval: 1800, maxInterval: 7200, audioSrc: 'audio/hydration.mp3' },
     { label: 'Movement', minInterval: 1800, maxInterval: 14400, audioSrc: 'audio/movement.mp3' },
-    { label: 'Gratitude', minInterval: 7200, maxInterval: 43200, audioSrc: 'audio/gratitude.mp3' }
+    { label: 'Gratitude', minInterval: 7200, maxInterval: 43200, audioSrc: 'audio/gratitude.mp3' },
+    { label: 'Eat Fruit', minInterval: 1800, maxInterval: 7200, audioSrc: 'audio/eat-fruit.mp3' },
+    { label: 'Pause and Evaluate', minInterval: 900, maxInterval: 3600, audioSrc: 'audio/pause-and-evaluate.mp3' }
 ];
 let instanceCounter = 0;
 
