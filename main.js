@@ -1,13 +1,14 @@
 // TODO: add eat fruit, stop and evaluate.
 const PRESET_OPTIONS = [
-    { label: 'Focus', minInterval: 1500, maxInterval: 7200, audioSrc: 'audio/focus.mp3' },
-    { label: 'Mindfulness', minInterval: 300, maxInterval: 1800, audioSrc: 'audio/mindfulness.mp3' },
-    { label: 'Hydration', minInterval: 1800, maxInterval: 7200, audioSrc: 'audio/hydration.mp3' },
-    { label: 'Movement', minInterval: 1800, maxInterval: 14400, audioSrc: 'audio/movement.mp3' },
-    { label: 'Gratitude', minInterval: 7200, maxInterval: 43200, audioSrc: 'audio/gratitude.mp3' },
-    { label: 'Eat Fruit', minInterval: 1800, maxInterval: 7200, audioSrc: 'audio/eat-fruit.mp3' },
-    { label: 'Pause and Evaluate', minInterval: 900, maxInterval: 3600, audioSrc: 'audio/pause-and-evaluate.mp3' }
+    { label: 'Focus', minInterval: 25, maxInterval: 120, audioSrc: 'audio/focus.mp3' },
+    { label: 'Mindfulness', minInterval: 5, maxInterval: 30, audioSrc: 'audio/mindfulness.mp3' },
+    { label: 'Hydration', minInterval: 30, maxInterval: 120, audioSrc: 'audio/hydration.mp3' },
+    { label: 'Movement', minInterval: 30, maxInterval: 240, audioSrc: 'audio/movement.mp3' },
+    { label: 'Gratitude', minInterval: 120, maxInterval: 720, audioSrc: 'audio/gratitude.mp3' },
+    { label: 'Eat Fruit', minInterval: 30, maxInterval: 120, audioSrc: 'audio/eat-fruit.mp3' },
+    { label: 'Pause and Evaluate', minInterval: 15, maxInterval: 60, audioSrc: 'audio/pause-and-evaluate.mp3' }
 ];
+
 let instanceCounter = 0;
 
 let audioIntervalInstances = [];
@@ -16,7 +17,9 @@ const DEFAULT_COUNTDOWN_VISIBILITY = false;
 
 function createAudioIntervalInstance({ label, minInterval, maxInterval, audioSrc, isCountdownVisible = DEFAULT_COUNTDOWN_VISIBILITY }) {
     const instanceId = instanceCounter++;
-
+    // Convert the input values from minutes to seconds
+    minInterval *= 60;
+    maxInterval *= 60;
     // Add the instance to the list of instances
     audioIntervalInstances.push({ instanceId, label, minInterval, maxInterval, audioSrc, isCountdownVisible, volume: 0.5 });
 
@@ -104,6 +107,9 @@ function getRandomInterval(minInterval, maxInterval) {
 
 
 function renderAudioIntervalInstance({ instanceId, label, minInterval, maxInterval, audioSrc, isCountdownVisible }) {
+    // Convert the minInterval and maxInterval values to minutes for display
+    const minIntervalInMinutes = minInterval / 60;
+    const maxIntervalInMinutes = maxInterval / 60;
     const instancesContainer = document.getElementById('audio-interval-instances');
     const countdownVisibilityClass = isCountdownVisible ? '' : 'hide';
     const instanceHtml = `
@@ -115,12 +121,12 @@ function renderAudioIntervalInstance({ instanceId, label, minInterval, maxInterv
             <div class="row">
                 <audio id="audio-${instanceId}" src="${audioSrc}"></audio>
                 <div class="form-group col-6">
-                    <label for="minInterval-${instanceId}">Minimum Interval (seconds):</label>
-                    <input type="number" class="form-control" id="minInterval-${instanceId}" value="${minInterval}">
+                    <label for="minInterval-${instanceId}">Minimum Interval (minutes):</label>
+                    <input type="number" class="form-control" id="minInterval-${instanceId}" value="${minIntervalInMinutes}">
                 </div>
                 <div class="form-group col-6">
-                    <label for="maxInterval-${instanceId}">Maximum Interval (seconds):</label>
-                    <input type="number" class="form-control" id="maxInterval-${instanceId}" value="${maxInterval}">
+                    <label for="maxInterval-${instanceId}">Maximum Interval (minutes):</label>
+                    <input type="number" class="form-control" id="maxInterval-${instanceId}" value="${maxIntervalInMinutes}">
                 </div>
                 <div class="form-group col-12">
                     <label for="instanceLabel-${instanceId}">Instance Label:</label>
@@ -163,10 +169,10 @@ function renderAudioIntervalInstance({ instanceId, label, minInterval, maxInterv
     instancesContainer.insertAdjacentHTML('beforeend', instanceHtml);
     // Input elements
     document.getElementById(`minInterval-${instanceId}`).addEventListener('change', (e) => {
-        updateInstanceSetting(instanceId, 'minInterval', e.target.value);
+        updateInstanceSetting(instanceId, 'minInterval', e.target.value * 60);
     });
     document.getElementById(`maxInterval-${instanceId}`).addEventListener('change', (e) => {
-        updateInstanceSetting(instanceId, 'maxInterval', e.target.value);
+        updateInstanceSetting(instanceId, 'maxInterval', e.target.value * 60);
     });
     document.getElementById(`volumeControl-${instanceId}`).addEventListener('change', (e) => {
         updateInstanceSetting(instanceId, 'volume', e.target.value);
@@ -284,8 +290,8 @@ function initialize() {
     createCustomInstanceButton.addEventListener('click', () => {
         createAudioIntervalInstance({
             label: 'Custom Instance',
-            minInterval: 60,
-            maxInterval: 7200,
+            minInterval: 1,
+            maxInterval: 120,
             audioSrc: 'audio/custom.mp3'
         });
     });
