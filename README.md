@@ -19,6 +19,8 @@ This application includes the following features:
 - Volume control and the ability to change audio files for each instance
 - Global control buttons for starting, stopping, showing timers, and deleting all instances
 
+All preset audio files are AI-generated voices using [Eleven Labs Speech Synthesis](https://beta.elevenlabs.io/speech-synthesis).
+
 ## How to use
 
 1. Visit the [Netlify link](https://interval-audio.netlify.app/) to access the working static site version of the Audio Interval Reminder.
